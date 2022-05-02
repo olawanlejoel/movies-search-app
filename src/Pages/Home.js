@@ -9,20 +9,19 @@ const Home = () => {
 	const [movie, setMovie] = useState({});
 	const [searchText, setSearchText] = useState('The Avenger');
 
-	const fetchMovie = async () => {
-		try {
-			const response = await fetch(
-				`https://www.omdbapi.com/?t=${searchText}&apikey=${process.env.REACT_APP_API_KEY}`
-			);
-			const data = await response.json();
-			setMovie(data);
-			setLoading(false);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
 	useEffect(() => {
+		const fetchMovie = async () => {
+			try {
+				const response = await fetch(
+					`https://www.omdbapi.com/?t=${searchText}&apikey=${process.env.REACT_APP_API_KEY}`
+				);
+				const data = await response.json();
+				setMovie(data);
+				setLoading(false);
+			} catch (error) {
+				console.log(error);
+			}
+		};
 		fetchMovie();
 	}, [searchText]);
 
